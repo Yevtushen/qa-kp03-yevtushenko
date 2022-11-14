@@ -1,6 +1,6 @@
 class BufferFile:
 
-    def __init__(self):
+    def __init__(self, name: str, parent_directory):
         pass
 
     def __delete__(self, instance):

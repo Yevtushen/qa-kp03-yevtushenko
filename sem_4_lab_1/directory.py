@@ -1,6 +1,6 @@
 class Directory:
 
-    def __init__(self):
+    def __init__(self, name, parent_directory):
         pass
 
     def __delete__(self, instance):
