@@ -6,23 +6,20 @@ from directory_test import testing_parent_directory
 
 @pytest.fixture()
 def testing_log_file():
-    return LogTextFile("log_f", testing_directory)
+    return LogTextFile("log_f", testing_directory, 'text')
 
 
-def check_if_log_file_deletes():
-    log_f = testing_log_file
-    log_f.__delete__()
-    assert log_f not in locals()
+def test_if_log_file_deletes(testing_log_file):
+    testing_log_file.__delete__()
+    assert testing_log_file not in locals()
 
 
-def check_if_log_file_movable(self):
-    log_f = testing_log_file
-    log_f.move_binary_file(testing_parent_directory())
-    assert log_f.parent_directory == self.testing_parent_directory()
+def test_if_log_file_movable(testing_log_file):
+    testing_log_file.move_binary_file(testing_parent_directory)
+    assert testing_log_file.directory == testing_parent_directory
 
 
-def check_if_line_appends():
-    log_f = testing_log_file()
-    log_f.append_line("line")
-    assert "line" in log_f.read_file()
-    assert "/n" in log_f.read_file()
+def test_if_line_appends(testing_log_file):
+    testing_log_file.append_line("line")
+    assert "line" in testing_log_file.read_file()
+    assert "/n" in testing_log_file.read_file()

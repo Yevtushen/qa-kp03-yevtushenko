@@ -6,16 +6,14 @@ from directory_test import testing_parent_directory
 
 @pytest.fixture()
 def testing_buffer_file():
-    return BufferFile("buffer_f", testing_directory())
+    return BufferFile("buffer_f", testing_directory, 10)
 
 
-def check_if_buffer_file_deletes():
-    buffer_f = testing_buffer_file()
-    buffer_f.__delete__()
-    assert buffer_f not in locals()
+def test_if_buffer_file_deletes(testing_buffer_file):
+    testing_buffer_file.__delete__()
+    assert testing_buffer_file not in locals()
 
 
-def check_if_buffer_file_movable(self):
-    buffer_f = testing_buffer_file()
-    buffer_f.move_binary_file(testing_parent_directory())
-    assert buffer_f.parent_directory == self.testing_parent_directory()
+def test_if_buffer_file_movable(testing_buffer_file):
+    testing_buffer_file.move_binary_file(testing_parent_directory)
+    assert testing_buffer_file.directory == testing_parent_directory

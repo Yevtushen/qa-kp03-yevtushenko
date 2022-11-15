@@ -4,21 +4,20 @@ from directory import Directory
 
 @pytest.fixture
 def testing_parent_directory():
-    return Directory("parent", None)
+    return Directory("parent", None, 10)
 
 
 @pytest.fixture()
 def testing_directory():
-    return Directory("current", testing_parent_directory())
+    parent = testing_parent_directory()
+    return Directory("current", parent, 10)
 
 
-def check_if_directory_deletes():
-    current_d = testing_directory()
-    current_d.__delete__()
-    assert current_d not in locals()
+def test_if_directory_deletes(testing_directory):
+    testing_directory.__delete__()
+    assert testing_directory not in locals()
 
 
-def check_if_directory_movable(self):
-    current_d = testing_directory()
-    current_d.move(self.testing_parent_directory())
-    assert current_d.parent_directory == self.testing_parent_directory
+def test_if_directory_movable(testing_directory, testing_parent_directory):
+    testing_directory.move(testing_parent_directory)
+    assert testing_directory.parent_directory == testing_directory
