@@ -3,7 +3,7 @@ class BinaryFile:
     def __init__(self, name: str, directory, contents: str):
         if directory.count < directory.max_size:
             self.directory = directory
-            self.directory.count += 1
+            self.directory.count = 1
             self.name = name
             self.contents = contents
             self.directory.list.append(self)
@@ -11,7 +11,7 @@ class BinaryFile:
             print("This directory is already full")
             return
 
-    def __delete__(self, instance):
+    def __del__(self):
         print("Deleted successfully")
 
     def move_binary_file(self, location):

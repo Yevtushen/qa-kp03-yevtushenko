@@ -3,7 +3,7 @@ class LogTextFile:
     def __init__(self, name: str, directory, contents: str):
         if directory.count < directory.max_size:
             self.directory = directory
-            self.directory.count += 1
+            self.directory.count = 1
             self.name = name
             self.contents = contents
             self.directory.list.append(self)
@@ -11,7 +11,7 @@ class LogTextFile:
             print("This directory is already full")
             return
 
-    def __delete__(self, instance):
+    def __del__(self):
         print("Deleted successfully")
 
     def move_log_file(self, location):
@@ -30,4 +30,4 @@ class LogTextFile:
         return self.contents
 
     def append_line(self, line: str):
-        self.contents += '\n' + line
+        self.contents += '/n' + line
