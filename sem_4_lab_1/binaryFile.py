@@ -26,6 +26,5 @@ class BinaryFile:
             print("Directory is already full")
             return
 
-
     def read_file(self):
         print(self.contents)

@@ -12,7 +12,6 @@ class BufferFile:
             print("This directory is already full")
             return
 
-
     def __del__(self):
         print("Deleted successfully")
 
@@ -34,5 +33,6 @@ class BufferFile:
         else:
             print("File already full")
 
-    def consume_element(self):
-        self.contents.pop()
+    def consume_element(self, element):
+        index = self.contents.index(element)
+        self.contents.pop(index)

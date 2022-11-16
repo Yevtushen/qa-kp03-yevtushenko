@@ -12,7 +12,7 @@ def testing_directory(testing_parent_directory):
     return Directory("current", testing_parent_directory, 10)
 
 
-def test_if_directory_deletes(testing_directory):
+def test_if_directory_deletable(testing_directory):
     testing_directory.__del__()
     assert testing_directory not in locals()
 
