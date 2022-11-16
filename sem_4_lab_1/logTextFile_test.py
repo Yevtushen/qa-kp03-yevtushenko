@@ -21,5 +21,5 @@ def test_if_log_file_movable(testing_log_file, testing_parent_directory):
 
 def test_if_line_appends(testing_log_file):
     testing_log_file.append_line("line")
-    assert "line" in testing_log_file.read_file()
-    assert "\n" in testing_log_file.read_file()
+    assert "line" in testing_log_file.contents
+    assert "\n" in testing_log_file.contents
