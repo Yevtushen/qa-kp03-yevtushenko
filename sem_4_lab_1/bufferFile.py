@@ -12,7 +12,11 @@ class BufferFile:
             print("This directory is already full")
             return
 
-    def __del__(self):
+    def delete(self):
+        print("Deleting " + self.name)
+        index = self.directory.list.index(self)
+        self.directory.list.pop(index)
+        del self
         print("Deleted successfully")
 
     def move_buffer_file(self, location):

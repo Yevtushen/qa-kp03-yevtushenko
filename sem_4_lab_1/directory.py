@@ -19,7 +19,11 @@ class Directory:
             print("This directory is already full")
             return
 
-    def __del__(self):
+    def delete(self):
+        print("Deleting " + self.name)
+        index = self.parent_directory.list.index(self)
+        self.parent_directory.list.pop(index)
+        del self
         print("Deleted successfully")
 
     def list_elements(self):
@@ -29,6 +33,8 @@ class Directory:
         print(resulting_list)
 
     def move_directory(self, location):
+        if self.parent_directory is None:
+            print("Impossible to move root directory")
         if location.count < location.max_size + self.count + 1:
             self.parent_directory.count -= self.count + 1
             index = self.parent_directory.list.index(self)

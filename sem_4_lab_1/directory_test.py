@@ -13,7 +13,7 @@ def testing_directory(testing_parent_directory):
 
 
 def test_if_directory_deletable(testing_directory):
-    testing_directory.__del__()
+    testing_directory.delete()
     assert testing_directory not in locals()
 
 

@@ -11,7 +11,9 @@ class LogTextFile:
             print("This directory is already full")
             return
 
-    def __del__(self):
+    def delete(self):
+        print("Deleting " + self.name)
+        del self
         print("Deleted successfully")
 
     def move_log_file(self, location):
@@ -27,7 +29,7 @@ class LogTextFile:
             return
 
     def read_file(self):
-        return self.contents
+        print(self.contents)
 
     def append_line(self, line: str):
-        self.contents += '/n' + line
+        self.contents += '\n' + line

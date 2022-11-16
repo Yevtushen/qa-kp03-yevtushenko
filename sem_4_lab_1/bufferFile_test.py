@@ -10,7 +10,7 @@ def testing_buffer_file(testing_directory):
 
 
 def test_if_buffer_file_deletable(testing_buffer_file):
-    testing_buffer_file.__del__()
+    testing_buffer_file.delete()
     assert testing_buffer_file not in locals()
 
 

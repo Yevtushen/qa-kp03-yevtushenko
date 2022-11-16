@@ -10,7 +10,7 @@ def testing_binary_file(testing_directory):
 
 
 def test_if_binary_file_deletable(testing_binary_file):
-    testing_binary_file.__del__()
+    testing_binary_file.delete()
     assert testing_binary_file not in locals()
 
 
