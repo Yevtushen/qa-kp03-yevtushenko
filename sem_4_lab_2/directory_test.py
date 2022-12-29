@@ -1,22 +1,30 @@
-import pytest
-from directory import Directory
+import pip._vendor.requests as requests
 
 
-@pytest.fixture
-def testing_parent_directory():
-    return Directory("parent", None, 10)
+def test_if_directory_creatable():
+    response = requests.post("http://127.0.0.1:5000/directory?parent_directory=root&name=child&max_size=10")
+    assert response.status_code == 201
+    assert response.json().get('message') == 'Created successfully.'
+    assert response.json().get('directory').get('max_size') == 10
+    assert response.json().get('directory').get('count') == 0
+    assert type(response.json().get('directory').get('parent_directory')) is not None
+    response = requests.post("http://127.0.0.1:5000/directory?parent_directory=root&name=child&max_size=10")
+    assert response.status_code == 400
+    assert response.json().get('message') == 'Such directory already exists.'
 
 
-@pytest.fixture()
-def testing_directory(testing_parent_directory):
-    return Directory("current", testing_parent_directory, 10)
+def test_if_directory_deletable():
+    response = requests.delete("http://127.0.0.1:5000/directory?name=child")
+    assert response.status_code == 200
+    assert response.json().get('message') == 'Deleted successfully.'
+    response = requests.delete("http://127.0.0.1:5000/directory?name=child")
+    assert response.status_code == 400
+    assert response.json().get('message') == 'Deleting failed.'
 
 
-def test_if_directory_deletable(testing_directory):
-    testing_directory.delete()
-    assert testing_directory not in locals()
+def test_if_directory_movable():
+    response = requests.patch("http://127.0.0.1:5000/directory?name=child&parentdirectory=root")
+    assert response.status_code == 200
+    assert response.json().get('message') == 'Moved successfully.'
+    assert response.json().get('directory').get('parent_directory') == "root"
 
-
-def test_if_directory_movable(testing_directory, testing_parent_directory):
-    testing_directory.move_directory(testing_parent_directory)
-    assert testing_directory.parent_directory == testing_parent_directory
