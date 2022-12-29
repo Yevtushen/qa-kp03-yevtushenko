@@ -10,16 +10,23 @@ def testing_buffer_file(testing_directory):
 
 
 def test_if_buffer_file_deletable(testing_buffer_file):
-    pass
+    testing_buffer_file.delete()
+    assert testing_buffer_file not in locals()
 
 
 def test_if_buffer_file_movable(testing_buffer_file, testing_parent_directory):
-    pass
+    testing_buffer_file.move_buffer_file(testing_parent_directory)
+    assert testing_buffer_file.directory == testing_parent_directory
 
 
 def test_if_element_pushes(testing_buffer_file):
-    pass
+    element = 'element'
+    testing_buffer_file.push_element(element)
+    assert element in testing_buffer_file.contents
 
 
 def test_if_element_consumes(testing_buffer_file):
-    pass
+    element = 'element'
+    testing_buffer_file.push_element(element)
+    testing_buffer_file.consume_element(element)
+    assert element not in testing_buffer_file.contents

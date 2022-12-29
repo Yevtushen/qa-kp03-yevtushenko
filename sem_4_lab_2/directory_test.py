@@ -13,8 +13,10 @@ def testing_directory(testing_parent_directory):
 
 
 def test_if_directory_deletable(testing_directory):
-    pass
+    testing_directory.delete()
+    assert testing_directory not in locals()
 
 
 def test_if_directory_movable(testing_directory, testing_parent_directory):
-    pass
+    testing_directory.move_directory(testing_parent_directory)
+    assert testing_directory.parent_directory == testing_parent_directory

@@ -10,12 +10,16 @@ def testing_log_file(testing_directory):
 
 
 def test_if_log_file_deletable(testing_log_file):
-    pass
+    testing_log_file.delete()
+    assert testing_log_file not in locals()
 
 
 def test_if_log_file_movable(testing_log_file, testing_parent_directory):
-    pass
+    testing_log_file.move_log_file(testing_parent_directory)
+    assert testing_log_file.directory == testing_parent_directory
 
 
 def test_if_line_appends(testing_log_file):
-    pass
+    testing_log_file.append_line("line")
+    assert "line" in testing_log_file.contents
+    assert "\n" in testing_log_file.contents

@@ -10,8 +10,10 @@ def testing_binary_file(testing_directory):
 
 
 def test_if_binary_file_deletable(testing_binary_file):
-    pass
+    testing_binary_file.delete()
+    assert testing_binary_file not in locals()
 
 
 def test_if_binary_file_movable(testing_binary_file, testing_parent_directory):
-    pass
+    testing_binary_file.move_binary_file(testing_parent_directory)
+    assert testing_binary_file.directory == testing_parent_directory
