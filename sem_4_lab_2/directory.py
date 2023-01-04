@@ -41,7 +41,7 @@ class Directory:
             self.parent_directory.list.pop(index)
             self.parent_directory = location
             self.parent_directory.list.append(self)
-            self.parent_directory.count += 1
+            self.parent_directory.count += self.count + 1
         else:
             print("Directory is already full")
             return
