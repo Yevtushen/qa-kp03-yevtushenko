@@ -4,9 +4,11 @@ import click
 
 app = Flask(__name__)
 
+
 @click.group()
 def cli():
     pass
+
 
 @click.command(name="create_directory")
 @click.argument('parent_directory')
@@ -18,7 +20,7 @@ def create_directory(parent_directory, name, max_size):
         'name' : name,
         'max_size' : max_size
     }
-    response = requests.post("http://127.0.0.1:5000/directory", json=for_post)
+    response = requests.post("http://127.0.0.1:5000/directory", params=for_post)
     print(response)
 
 
@@ -26,7 +28,7 @@ def create_directory(parent_directory, name, max_size):
 @click.argument('name')
 def delete_directory(name):
     for_delete = {'name': name}
-    response = requests.delete("http://127.0.0.1:5000/directory", json=for_delete)
+    response = requests.delete("http://127.0.0.1:5000/directory", params=for_delete)
     print(response)
 
 
@@ -40,7 +42,7 @@ def list_directory(name, parent_directory, max_size):
         'name': name,
         'max_size': max_size
     }
-    response = requests.get("http://127.0.0.1:5000/directory", json=for_get)
+    response = requests.get("http://127.0.0.1:5000/directory", params=for_get)
     print(response)
 
 
@@ -54,7 +56,7 @@ def move_directory(parent_directory, name, max_size):
         'name': name,
         'max_size': max_size
     }
-    response = requests.patch("http://127.0.0.1:5000/directory", json=for_patch)
+    response = requests.patch("http://127.0.0.1:5000/directory", params=for_patch)
     print(response)
     pass
 
@@ -69,7 +71,7 @@ def create_binary_file(directory, name, contents):
         'name': name,
         'contents': contents
     }
-    response = requests.post("http://127.0.0.1:5000/binaryfile", json=for_post)
+    response = requests.post("http://127.0.0.1:5000/binaryfile", params=for_post)
     print(response)
 
 
@@ -77,7 +79,7 @@ def create_binary_file(directory, name, contents):
 @click.argument('name')
 def delete_binary_file(name):
     for_delete = {'name': name}
-    response = requests.delete("http://127.0.0.1:5000/binaryfile", json=for_delete)
+    response = requests.delete("http://127.0.0.1:5000/binaryfile", params=for_delete)
     print(response)
 
 
@@ -91,7 +93,7 @@ def move_binary_file(directory, name, contents):
         'name': name,
         'contents': contents
     }
-    response = requests.patch("http://127.0.0.1:5000/binaryfile", json=for_patch)
+    response = requests.patch("http://127.0.0.1:5000/binaryfile", params=for_patch)
     print(response)
 
 
@@ -105,7 +107,7 @@ def read_binary_file(directory, name, contents):
         'name': name,
         'contents': contents
     }
-    response = requests.get("http://127.0.0.1:5000/binaryfile", json=for_get)
+    response = requests.get("http://127.0.0.1:5000/binaryfile", params=for_get)
     print(response)
 
 
@@ -121,7 +123,7 @@ def create_buffer_file(directory, name, max_size, contents):
         'max_size': max_size,
         'contents': contents
     }
-    response = requests.post("http://127.0.0.1:5000/bufferfile", json=for_post)
+    response = requests.post("http://127.0.0.1:5000/bufferfile", params=for_post)
     print(response)
 
 
@@ -129,7 +131,7 @@ def create_buffer_file(directory, name, max_size, contents):
 @click.argument('name')
 def delete_buffer_file(name):
     for_delete = {'name': name}
-    response = requests.post("http://127.0.0.1:5000/bufferfile", json=for_delete)
+    response = requests.post("http://127.0.0.1:5000/bufferfile", params=for_delete)
     print(response)
 
 
@@ -145,7 +147,7 @@ def move_buffer_file(directory, name, max_size, contents):
         'max_size' : max_size,
         'contents': contents
     }
-    response = requests.patch("http://127.0.0.1:5000/bufferfile", json=for_patch)
+    response = requests.patch("http://127.0.0.1:5000/bufferfile", params=for_patch)
     print(response)
 
 
@@ -161,7 +163,7 @@ def read_buffer_file(directory, name, max_size, contents):
         'max_size' : max_size,
         'contents': contents
     }
-    response = requests.get("http://127.0.0.1:5000/bufferfile", json=for_get)
+    response = requests.get("http://127.0.0.1:5000/bufferfile", params=for_get)
     print(response)
 
 
@@ -173,7 +175,7 @@ def push_buffer_file(name, element):
         'name' : name,
         'push' : element
     }
-    response = requests.patch("http://127.0.0.1:5000/bufferfile", json=for_patch)
+    response = requests.patch("http://127.0.0.1:5000/bufferfile", params=for_patch)
     print(response)
 
 
@@ -185,7 +187,7 @@ def consume_buffer_file(name, element):
         'name': name,
         'consume': element,
     }
-    response = requests.patch("http://127.0.0.1:5000/bufferfile", json=for_patch)
+    response = requests.patch("http://127.0.0.1:5000/bufferfile", params=for_patch)
     print(response)
 
 
@@ -199,7 +201,7 @@ def create_log_text_file(directory, name, contents):
         'name': name,
         'contents': contents
     }
-    response = requests.post("http://127.0.0.1:5000/logtextfile", json=for_post)
+    response = requests.post("http://127.0.0.1:5000/logtextfile", params=for_post)
     print(response)
 
 
@@ -207,7 +209,7 @@ def create_log_text_file(directory, name, contents):
 @click.argument('name')
 def delete_log_text_file(name):
     for_delete = {'name': name}
-    response = requests.delete("http://127.0.0.1:5000/logtextfile", json=for_delete)
+    response = requests.delete("http://127.0.0.1:5000/logtextfile", params=for_delete)
     print(response)
 
 
@@ -221,8 +223,8 @@ def move_log_text_file(directory, name, contents):
         'name': name,
         'contents': contents
     }
-    response = requests.patch("http://127.0.0.1:5000/bufferfile", json=for_patch)
-    print(response)
+    response = requests.patch("http://127.0.0.1:5000/bufferfile", params=for_patch)
+    print(response.content)
 
 
 @click.command(name="read_log_text_file")
@@ -235,7 +237,7 @@ def read_log_text_file(directory, name, contents):
         'name': name,
         'contents': contents
     }
-    response = requests.get("http://127.0.0.1:5000/logtextfile", json=for_get)
+    response = requests.get("http://127.0.0.1:5000/logtextfile", params=for_get)
     print(response)
 
 
@@ -247,8 +249,31 @@ def append_log_text_file(name, line):
         'name' : name,
         'append' : line
     }
-    response = requests.patch("http://127.0.0.1:5000/logtextfile", json=for_patch)
+    response = requests.patch("http://127.0.0.1:5000/logtextfile", params=for_patch)
     print(response)
+
+
+cli.add_command(create_directory)
+cli.add_command(delete_directory)
+cli.add_command(move_directory)
+cli.add_command(list_directory)
+
+cli.add_command(create_binary_file)
+cli.add_command(delete_binary_file)
+cli.add_command(move_binary_file)
+cli.add_command(read_binary_file)
+
+cli.add_command(create_buffer_file)
+cli.add_command(delete_buffer_file)
+cli.add_command(move_buffer_file)
+cli.add_command(push_buffer_file)
+cli.add_command(consume_buffer_file)
+
+cli.add_command(create_log_text_file)
+cli.add_command(delete_log_text_file)
+cli.add_command(move_log_text_file)
+cli.add_command(read_log_text_file)
+cli.add_command(append_log_text_file)
 
 
 if __name__ == '__main__':
